@@ -27,7 +27,9 @@ public static void main(String[] args){
 			this.attentes = attentes;
 		}
 	public void affiche(){
-		
+		System.out.println("\nNom : "+this.nom+"\nPrénom : "+this.prenom+"\nFormation : "
+					+this.formation+"\nExpérience : "+this.experiences+"\nCompétences : "+this.competences
+					+"Attentes : "+this.attentes);
 	}
 		
 }
