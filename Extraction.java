@@ -71,7 +71,8 @@ public class Extraction {
 			tabPlats = listPlats.toArray(tabPlats);
 			tabCommandes = listCommandes.toArray(tabCommandes);
 			//Call la class Facture avec 3 tableau de String.
-			new Facture(tabClients, tabPlats, tabCommandes);
+			Facture facture1 =new Facture(tabClients, tabPlats, tabCommandes);
+			ecrireFichier(facture1.calculerFacture());
 		} else {
 			System.out.println(erreur);
 
