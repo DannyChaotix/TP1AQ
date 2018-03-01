@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public class Extraction {
 
-	private static String fileName = "facture.txt";
+	private static String fileName = "src/facture.txt";
 	private static String erreur = "Le fichier ne respecte pas le format demandé !";
 
 	private static List<String> listClients = new ArrayList<String>();
