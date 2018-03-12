@@ -170,7 +170,7 @@ public class Extraction {
 					+ temps.getMinute() + "-" + temps.getSecond() + ".txt", "UTF-8");
 			writer.println("Bienvenue chez Barette!");
 			writer.println("Factures:");
-
+			// écrie les erreurs
 			for (int i = 0; i < tabErreur.length; i++) {
 				writer.println(tabErreur[i]);
 			}
