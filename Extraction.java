@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -10,10 +11,10 @@ public class Extraction {
 	private static List<String> listClients = new ArrayList<String>();
 	private static List<String> listPlats = new ArrayList<String>();
 	private static List<String> listCommandes = new ArrayList<String>();
-	
-	//Lit les lignes du fichier texte et vérifie le format, un format non conforme sera rejeté avec un message d'erreur.
+
+	// Lit les lignes du fichier texte et vérifie le format, un format non conforme
+	// sera rejeté avec un message d'erreur.
 	public static void main(String[] args) {
-		
 
 		boolean valide = true;
 		try {
@@ -70,8 +71,8 @@ public class Extraction {
 			tabClients = listClients.toArray(tabClients);
 			tabPlats = listPlats.toArray(tabPlats);
 			tabCommandes = listCommandes.toArray(tabCommandes);
-			//Call la class Facture avec 3 tableau de String.
-			Facture facture1 =new Facture(tabClients, tabPlats, tabCommandes);
+			// Call la class Facture avec 3 tableau de String.
+			Facture facture1 = new Facture(tabClients, tabPlats, tabCommandes);
 			ecrireFichier(facture1.calculerFacture());
 		} else {
 			System.out.println(erreur);
@@ -79,7 +80,9 @@ public class Extraction {
 		}
 
 	}
-	//Switch qui vérifie la String avec un indice qui permet de savoir si nous somme dans la section Clients, Plats, Command ou autre.
+
+	// Switch qui vérifie la String avec un indice qui permet de savoir si nous
+	// somme dans la section Clients, Plats, Command ou autre.
 	private static boolean verification(String ligne, int ind) {
 		boolean verifier = true;
 		String[] tabStringTemp;
@@ -122,7 +125,8 @@ public class Extraction {
 
 		return verifier;
 	}
-	//Vérifie un mot
+
+	// Vérifie un mot
 	private static boolean verifierMot(String ligne) {
 		boolean verifier = true;
 		if (ligne.contains(" ") || Pattern.compile("[0-9]").matcher(ligne).find()) {
@@ -130,7 +134,8 @@ public class Extraction {
 		}
 		return verifier;
 	}
-	//Vérifie un Chiffre
+
+	// Vérifie un Chiffre
 	private static boolean verifierChiffre(String ligne) {
 		boolean verifier = true;
 		try {
@@ -140,7 +145,8 @@ public class Extraction {
 		}
 		return verifier;
 	}
-	//Vérifie une quantité d'un plat
+
+	// Vérifie une quantité d'un plat
 	private static boolean verifierUnite(String ligne) {
 		boolean verifier = true;
 		if (ligne.length() != 1) {
@@ -154,14 +160,21 @@ public class Extraction {
 		}
 		return verifier;
 	}
-	//Crée un fichier texte "ImpFacture.txt" avec un tableau à 2 dimension.
-	public static void ecrireFichier(String[][] tabString) {
-		PrintWriter writer;
 
+	// Crée un fichier texte "ImpFacture.txt" avec un tableau à 2 dimension.
+	public static void ecrireFichier(String[][] tabString, String[] tabErreur) {
+		PrintWriter writer;
+		LocalDateTime temps = LocalDateTime.now();
 		try {
-			writer = new PrintWriter("ImpFacture.txt", "UTF-8");
+			writer = new PrintWriter("Facture-du-" + temps.getDayOfMonth() + "-" + temps.getHour() + "-"
+					+ temps.getMinute() + "-" + temps.getSecond() + ".txt", "UTF-8");
 			writer.println("Bienvenue chez Barette!");
 			writer.println("Factures:");
+
+			for (int i = 0; i < tabErreur.length; i++) {
+				writer.println(tabErreur[i]);
+			}
+			writer.println("");
 			for (int i = 0; i < tabString[0].length; i++) {
 				writer.println(tabString[0][i] + " " + tabString[1][i]);
 			}
