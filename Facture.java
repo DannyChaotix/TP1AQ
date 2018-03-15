@@ -1,4 +1,6 @@
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Facture {
 
@@ -6,6 +8,7 @@ public class Facture {
 	private String[] tabPlats;
 	private double[] tabPrix;
 	private String[] tabCommandes;
+	private List<String> erreures = new ArrayList<String>();
 
 	public Facture(String[] tabClients, String[] tabPlats, String[] tabCommandes) {
 		super();
@@ -47,23 +50,31 @@ public class Facture {
 								+ Double.parseDouble(commande[2]) + tabPlats[k] + "(s).");
 						if (commande[1].equals(tabPlats[k])) {
 							prix = (tabPrix[k] * Double.parseDouble(commande[2]));
+						} else {
+							erreures.add(commande[1]);
 						}
-						
+
 						System.out.println("Prix a ajouter= " + prix);
 						tabCout[i] += prix;
-						double prixTaxe = tabCout[i]*5;
-						System.out.println("Avec TPS: " + (prixTaxe-tabCout[i]));
-						prixTaxe = prixTaxe*10;
-						System.out.println("Avec la TVQ: " + prixTaxe);
-						tabCout[i] = prixTaxe;
+						double prixTPS = tabCout[i] * 0.05;
+						System.out.println("TPS: " + prixTPS);
+						double prixTVQ = (prix + prixTPS) * 0.10;
+						System.out.println("TVQ: " + prixTVQ);
+						tabCout[i] = (prix + prixTPS + prixTVQ);
+
 						System.out.println("Prix totale pour " + tabClients[i] + " = " + tabCout[i]);
 					}
 				}
 			}
-			for(int q = 0; q<tabCout.length;q++) {
+			for (int q = 0; q < tabCout.length; q++) {
 				reponce[1][q] = format.format(tabCout[q]);
 			}
 		}
 		return reponce;
+	}
+
+	public String[] getList() {
+		String[] tabErreures = (String[]) erreures.toArray(); 
+		return tabErreures;
 	}
 }
