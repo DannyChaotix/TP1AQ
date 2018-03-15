@@ -1,4 +1,5 @@
 import java.text.DecimalFormat;
+import java.util.function.Predicate;
 
 public class Facture {
 
@@ -48,8 +49,14 @@ public class Facture {
 						if (commande[1].equals(tabPlats[k])) {
 							prix = (tabPrix[k] * Double.parseDouble(commande[2]));
 						}
+						
 						System.out.println("Prix a ajouter= " + prix);
 						tabCout[i] += prix;
+						double prixTaxe = tabCout[i]*5;
+						System.out.println("Avec TPS: " + (prixTaxe-tabCout[i]));
+						prixTaxe = prixTaxe*10;
+						System.out.println("Avec la TVQ: " + prixTaxe);
+						tabCout[i] = prixTaxe;
 						System.out.println("Prix totale pour " + tabClients[i] + " = " + tabCout[i]);
 					}
 				}
