@@ -39,7 +39,6 @@ public class Facture {
 				// commande contient les aspects de la commande (0=Client, 1=Plat, 2=Quantitée)
 				String[] commande = tabCommandes[j].split(" ");
 
-				System.out.println("commande = " + commande[0] + ", client = " + tabClients[i] + ".");
 				if (commande[0].equals(tabClients[i])) {
 					System.out.println("commande == client");
 
@@ -47,8 +46,6 @@ public class Facture {
 					boolean tester = false;
 					for (int k = 0; k < tabPlats.length; k++) {
 						double prix = 0;
-						System.out.println("\t commande = " + commande[1] + ", plat = "
-								+ Double.parseDouble(commande[2]) + tabPlats[k] + "(s).");
 						if (commande[1].equals(tabPlats[k])) {
 							prix = (tabPrix[k] * Double.parseDouble(commande[2]));
 							System.out.println("Prix a ajouter= " + prix);
