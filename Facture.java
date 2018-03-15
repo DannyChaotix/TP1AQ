@@ -8,7 +8,7 @@ public class Facture {
 	private String[] tabPlats;
 	private double[] tabPrix;
 	private String[] tabCommandes;
-	private List<String> erreures = new ArrayList<String>();
+	private static List<String> erreures = new ArrayList<String>();
 
 	public Facture(String[] tabClients, String[] tabPlats, String[] tabCommandes) {
 		super();
@@ -73,8 +73,10 @@ public class Facture {
 		return reponce;
 	}
 
-	public String[] getList() {
-		String[] tabErreures = (String[]) erreures.toArray(); 
+	public static String[] getList() {
+		//tabPlats = listPlats.toArray(tabPlats); String[] tabClients = new String[listClients.size()];
+		String[] tabErreures = new String[erreures.size()];
+		tabErreures = erreures.toArray(tabErreures); 
 		return tabErreures;
 	}
 }
