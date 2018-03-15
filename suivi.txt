@@ -1,0 +1,26 @@
+David
+----------------------------
+
+Création de la Class Facture
+Ajout de la méthode CalculerFacture
+Ajout de la méthode Constucteur
+Ajout de la méthode getList
+
+Update Taxe TPS TVQ dans CalculerFacture
+Update Affichage sur le terminal CaldulerFacture
+
+Test Unitaire des méthodes Facture
+
+Patrick
+----------------------------
+
+Création de la Class Extraction
+Ajout de la méthode Main
+Ajout de la méthode Vérification
+Ajout ecrirFichier
+
+Test Unitaire des méthodes Extraction
+
+Update Nouveau nom pour le fichier texte
+Update ecriture du tableau d'erreurs dans le fichier texte
+
