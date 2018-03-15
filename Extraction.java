@@ -174,7 +174,7 @@ public class Extraction {
 			for (int i = 0; i < tabErreur.length; i++) {
 				writer.println(tabErreur[i]);
 			}
-			writer.println("");
+			writer.println("--------------------------------------------------------------------------------------");
 			for (int i = 0; i < tabString[0].length; i++) {
 				writer.println(tabString[0][i] + " " + tabString[1][i]);
 			}
