@@ -1,5 +1,4 @@
 import java.text.DecimalFormat;
-import java.util.function.Predicate;
 
 public class Facture {
 
