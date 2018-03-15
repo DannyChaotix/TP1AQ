@@ -44,27 +44,33 @@ public class Facture {
 					System.out.println("commande == client");
 
 					// La boucle trouve le plat
+					boolean tester = false;
 					for (int k = 0; k < tabPlats.length; k++) {
 						double prix = 0;
 						System.out.println("\t commande = " + commande[1] + ", plat = "
 								+ Double.parseDouble(commande[2]) + tabPlats[k] + "(s).");
 						if (commande[1].equals(tabPlats[k])) {
 							prix = (tabPrix[k] * Double.parseDouble(commande[2]));
-						} else {
-							erreures.add(commande[1]);
+							System.out.println("Prix a ajouter= " + prix);
+							tabCout[i] += prix;
+							double prixTPS = tabCout[i] * 0.05;
+							System.out.println("TPS: " + prixTPS);
+							double prixTVQ = (prix + prixTPS) * 0.10;
+							System.out.println("TVQ: " + prixTVQ);
+							tabCout[i] = (prix + prixTPS + prixTVQ);
+
+							System.out.println("Prix totale pour " + tabClients[i] + " = " + tabCout[i]);
+							tester = true;
 						}
 
-						System.out.println("Prix a ajouter= " + prix);
-						tabCout[i] += prix;
-						double prixTPS = tabCout[i] * 0.05;
-						System.out.println("TPS: " + prixTPS);
-						double prixTVQ = (prix + prixTPS) * 0.10;
-						System.out.println("TVQ: " + prixTVQ);
-						tabCout[i] = (prix + prixTPS + prixTVQ);
+						
 
-						System.out.println("Prix totale pour " + tabClients[i] + " = " + tabCout[i]);
+					}
+					if (!tester) {
+						erreures.add(commande[1]);
 					}
 				}
+
 			}
 			for (int q = 0; q < tabCout.length; q++) {
 				reponce[1][q] = format.format(tabCout[q]);
@@ -74,9 +80,15 @@ public class Facture {
 	}
 
 	public static String[] getList() {
-		//tabPlats = listPlats.toArray(tabPlats); String[] tabClients = new String[listClients.size()];
-		String[] tabErreures = new String[erreures.size()];
-		tabErreures = erreures.toArray(tabErreures); 
-		return tabErreures;
+		// tabPlats = listPlats.toArray(tabPlats); String[] tabClients = new
+		// String[listClients.size()];
+		if (erreures.size() == 0) {
+			String[] tabErreures = new String[0];
+			return tabErreures;
+		} else {
+			String[] tabErreures = new String[erreures.size()];
+			tabErreures = erreures.toArray(tabErreures);
+			return tabErreures;
+		}
 	}
 }
