@@ -171,13 +171,18 @@ public class Extraction {
 			writer.println("Bienvenue chez Barette!");
 			writer.println("Factures:");
 			// écrie les erreurs
-			for (int i = 0; i < tabErreur.length; i++) {
-				writer.println(tabErreur[i]);
-			}
-			writer.println("--------------------------------------------------------------------------------------");
+			
 			for (int i = 0; i < tabString[0].length; i++) {
 				writer.println(tabString[0][i] + " " + tabString[1][i]);
 			}
+			writer.println("--------------------------------------------------------------------------------------");
+			if (tabErreur != null) {
+				for (int i = 0; i < tabErreur.length; i++) {
+					writer.println(tabErreur[i]);
+				}
+			}
+			
+			
 			writer.close();
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
