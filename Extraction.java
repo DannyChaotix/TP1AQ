@@ -127,7 +127,7 @@ public class Extraction {
 	}
 
 	// Vérifie un mot
-	private static boolean verifierMot(String ligne) {
+	public static boolean verifierMot(String ligne) {
 		boolean verifier = true;
 		if (ligne.contains(" ") || Pattern.compile("[0-9]").matcher(ligne).find()) {
 			verifier = false;
@@ -136,7 +136,7 @@ public class Extraction {
 	}
 
 	// Vérifie un Chiffre
-	private static boolean verifierChiffre(String ligne) {
+	public static boolean verifierChiffre(String ligne) {
 		boolean verifier = true;
 		try {
 			Double.parseDouble(ligne);
@@ -147,7 +147,7 @@ public class Extraction {
 	}
 
 	// Vérifie une quantité d'un plat
-	private static boolean verifierUnite(String ligne) {
+	public static boolean verifierUnite(String ligne) {
 		boolean verifier = true;
 		if (ligne.length() != 1) {
 			verifier = false;
