@@ -61,4 +61,16 @@ public class JUnit_Test_Case_Facture {
 		assertEquals("-2", tabTest[0]);
 		
 	}
+	
+	@Test
+	public void testFactureDonneesSommeTotal() {
+		String[][] tabTest;
+		
+		tabTest = factureTestVal.calculerFacture();
+		assertEquals("12,13$", tabTest[1][0]);
+		assertEquals("18,51$", tabTest[1][1]);
+		assertEquals("0,00$", tabTest[1][2]);
+		
+	}
+	
 }
