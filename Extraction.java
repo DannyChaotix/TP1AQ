@@ -178,7 +178,7 @@ public class Extraction {
 			writer.println("--------------------------------------------------------------------------------------");
 			if (tabErreur != null) {
 				for (int i = 0; i < tabErreur.length; i++) {
-					writer.println(tabErreur[i]);
+					writer.println(tabErreur[i]+" non valide.");
 				}
 			}
 			
