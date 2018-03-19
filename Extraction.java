@@ -83,7 +83,7 @@ public class Extraction {
 
 	// Switch qui vérifie la String avec un indice qui permet de savoir si nous
 	// somme dans la section Clients, Plats, Command ou autre.
-	private static boolean verification(String ligne, int ind) {
+	static boolean verification(String ligne, int ind) {
 		boolean verifier = true;
 		String[] tabStringTemp;
 
