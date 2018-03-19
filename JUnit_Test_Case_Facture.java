@@ -33,11 +33,29 @@ public class JUnit_Test_Case_Facture {
 		tabTest = factureTestVal.getList();
 		assertEquals(0, tabTest.length);
 		
+	}
+	@Test
+	public void testFactureDonneesErrClient() {
+		String[] tabTest;
+		
 		tabTest = factureTestErrClient.getList();
 		assertEquals("Patrick", tabTest[0]);
+
+		
+	}
+	
+	@Test
+	public void testFactureDonneesErrPlats() {
+		String[] tabTest;
 		
 		tabTest = factureTestErrPlats.getList();
 		assertEquals("BigMac", tabTest[0]);
+		
+	}
+	
+	@Test
+	public void testFactureDonneesErrQuantite() {
+		String[] tabTest;
 		
 		tabTest = factureTestErrQuantite.getList();
 		assertEquals("-2", tabTest[0]);
