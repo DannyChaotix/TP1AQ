@@ -5,6 +5,24 @@ import java.util.List;
 public class Facture {
 
 	private String[] tabClients;
+	public String[] getTabClients() {
+		return tabClients;
+	}
+
+	public String[] getTabPlats() {
+		return tabPlats;
+	}
+
+	public double[] getTabPrix() {
+		return tabPrix;
+	}
+
+
+	public String[] getTabCommandes() {
+		return tabCommandes;
+	}
+
+
 	private String[] tabPlats;
 	private double[] tabPrix;
 	private String[] tabCommandes;
