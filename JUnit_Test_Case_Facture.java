@@ -30,14 +30,18 @@ public class JUnit_Test_Case_Facture {
 	public void testFactureDonneesValide() {
 		String[] tabTest;
 		
+		factureTestVal.calculerFacture();
 		tabTest = factureTestVal.getList();
 		assertEquals(0, tabTest.length);
 		
+		
 	}
+	
 	@Test
 	public void testFactureDonneesErrClient() {
 		String[] tabTest;
 		
+		factureTestErrClient.calculerFacture();
 		tabTest = factureTestErrClient.getList();
 		assertEquals("Patrick", tabTest[0]);
 
@@ -48,6 +52,7 @@ public class JUnit_Test_Case_Facture {
 	public void testFactureDonneesErrPlats() {
 		String[] tabTest;
 		
+		factureTestErrPlats.calculerFacture();
 		tabTest = factureTestErrPlats.getList();
 		assertEquals("BigMac", tabTest[0]);
 		
@@ -57,6 +62,7 @@ public class JUnit_Test_Case_Facture {
 	public void testFactureDonneesErrQuantite() {
 		String[] tabTest;
 		
+		factureTestErrQuantite.calculerFacture();
 		tabTest = factureTestErrQuantite.getList();
 		assertEquals("-2", tabTest[0]);
 		
