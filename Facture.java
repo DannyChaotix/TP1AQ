@@ -45,6 +45,8 @@ public class Facture {
 
 	public String[][] calculerFacture() {
 
+		TrouverErreures();
+
 		affichage += "Factures: \n";
 		DecimalFormat format = new DecimalFormat("0.00$");
 
@@ -52,23 +54,22 @@ public class Facture {
 		String[][] reponce = new String[2][tabClients.length];
 
 		reponce[0] = tabClients;
-		
+
 		for (int i = 0; i < tabClients.length; i++) {
-			
-			boolean tester2 = false;
+
 			for (int j = 0; j < tabCommandes.length; j++) {
 				// commande contient les aspects de la commande (0=Client, 1=Plat, 2=Quantitée)
 				String[] commande = tabCommandes[j].split(" ");
 
 				if (commande[0].equals(tabClients[i])) {
-					
+
 					// La boucle trouve le plat
-					boolean tester = false;
 					for (int k = 0; k < tabPlats.length; k++) {
 						double prix = 0;
 						if (commande[1].equals(tabPlats[k])) {
 							prix = (tabPrix[k] * Double.parseDouble(commande[2]));
-							affichage += ("Repas: " + tabPlats[k] + "\n"+ "Prix a ajouter= " + format.format(prix) + "\n");
+							affichage += ("Repas: " + tabPlats[k] + "\n" + "Prix a ajouter= " + format.format(prix)
+									+ "\n");
 							double prixTPS = prix * 0.05;
 							affichage += ("TPS: " + format.format(prixTPS) + "\n");
 							double prixTVQ = (prix + prixTPS) * 0.10;
@@ -78,7 +79,6 @@ public class Facture {
 
 							affichage += ("Prix du repas: " + tabPlats[k] + " = " + format.format(save) + "\n"
 									+ "====================\n");
-							tester = true;
 
 							try {
 								String[] commandeTemp = tabCommandes[j + 1].split(" ");
@@ -93,9 +93,7 @@ public class Facture {
 						}
 
 					}
-					if (!tester) {
-						erreures.add(commande[1]);
-					}
+					
 
 				}
 
@@ -104,8 +102,7 @@ public class Facture {
 				reponce[1][q] = format.format(tabCout[q]);
 			}
 		}
-		
-		
+
 		this.setList();
 
 		for (int r = 0; r < this.tabErreures.length; r++) {
@@ -130,6 +127,35 @@ public class Facture {
 			String[] tabErreures = new String[erreures.size()];
 			tabErreures = erreures.toArray(tabErreures);
 			this.tabErreures = tabErreures;
+		}
+	}
+
+	public void TrouverErreures() {
+		boolean tester = false, tester2 = false;
+
+		for (int i = 0; i < tabCommandes.length; i++) {
+			String[] com = tabCommandes[i].split(" ");
+
+			for (int j = 0; j < tabClients.length; j++) {
+				if (tabClients[j].equals(com[0])) {
+					tester = true;
+				}
+				for (int k = 0; k < tabPlats.length; k++) {
+					if (com[1].equals(tabPlats[k])) {
+						tester2 = true;
+					}
+				}
+
+
+			}
+			
+			if (!tester) {
+				erreures.add(com[0]);
+			}
+			if (!tester2) {
+				erreures.add(com[1]);}
+			
+
 		}
 	}
 }
