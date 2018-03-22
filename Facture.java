@@ -5,6 +5,7 @@ import java.util.List;
 public class Facture {
 
 	private String[] tabClients;
+
 	public String[] getTabClients() {
 		return tabClients;
 	}
@@ -17,15 +18,15 @@ public class Facture {
 		return tabPrix;
 	}
 
-
 	public String[] getTabCommandes() {
 		return tabCommandes;
 	}
 
-	private String[] tabErreures;
+	private String[] tabErreures = new String[0];
 	private String[] tabPlats;
 	private double[] tabPrix;
 	private String[] tabCommandes;
+	private String affichage = "";
 	private static List<String> erreures = new ArrayList<String>();
 
 	public Facture(String[] tabClients, String[] tabPlats, String[] tabCommandes) {
@@ -44,46 +45,58 @@ public class Facture {
 
 	public String[][] calculerFacture() {
 
-		System.out.println("Factures:");
+		affichage += "Factures: \n";
 		DecimalFormat format = new DecimalFormat("0.00$");
 
 		double[] tabCout = new double[tabClients.length];
 		String[][] reponce = new String[2][tabClients.length];
 
 		reponce[0] = tabClients;
+		
 		for (int i = 0; i < tabClients.length; i++) {
-
+			
+			boolean tester2 = false;
 			for (int j = 0; j < tabCommandes.length; j++) {
 				// commande contient les aspects de la commande (0=Client, 1=Plat, 2=Quantitée)
 				String[] commande = tabCommandes[j].split(" ");
 
 				if (commande[0].equals(tabClients[i])) {
-					System.out.println("commande == client");
-
+					
 					// La boucle trouve le plat
 					boolean tester = false;
 					for (int k = 0; k < tabPlats.length; k++) {
 						double prix = 0;
 						if (commande[1].equals(tabPlats[k])) {
 							prix = (tabPrix[k] * Double.parseDouble(commande[2]));
-							System.out.println("Prix a ajouter= " + prix);
-							tabCout[i] += prix;
-							double prixTPS = tabCout[i] * 0.05;
-							System.out.println("TPS: " + prixTPS);
+							affichage += ("Repas: " + tabPlats[k] + "\n"+ "Prix a ajouter= " + format.format(prix) + "\n");
+							double prixTPS = prix * 0.05;
+							affichage += ("TPS: " + format.format(prixTPS) + "\n");
 							double prixTVQ = (prix + prixTPS) * 0.10;
-							System.out.println("TVQ: " + prixTVQ);
-							tabCout[i] = (prix + prixTPS + prixTVQ);
+							affichage += ("TVQ: " + format.format(prixTVQ) + "\n");
+							double save = (prix + prixTPS + prixTVQ);
+							tabCout[i] += save;
 
-							System.out.println("Prix totale pour " + tabClients[i] + " = " + tabCout[i]);
+							affichage += ("Prix du repas: " + tabPlats[k] + " = " + format.format(save) + "\n"
+									+ "====================\n");
 							tester = true;
-						}
 
-						
+							try {
+								String[] commandeTemp = tabCommandes[j + 1].split(" ");
+								if (!tabClients[i].equals(commandeTemp[0])) {
+									affichage += "Prix pour " + tabClients[i] + ": " + format.format(tabCout[i]) + "\n"
+											+ "====================\n\n";
+								}
+							} catch (ArrayIndexOutOfBoundsException e) {
+								affichage += "Prix pour " + tabClients[i] + ": " + format.format(tabCout[i]) + "\n"
+										+ "====================\n\n";
+							}
+						}
 
 					}
 					if (!tester) {
 						erreures.add(commande[1]);
 					}
+
 				}
 
 			}
@@ -91,15 +104,23 @@ public class Facture {
 				reponce[1][q] = format.format(tabCout[q]);
 			}
 		}
+		
+		
 		this.setList();
+
+		for (int r = 0; r < this.tabErreures.length; r++) {
+			System.out.println("Erreur #" + (r + 1) + ": " + tabErreures[r] + " est invalide.");
+		}
+
+		System.out.println(affichage);
 		return reponce;
 	}
 
-	public  String[] getList() {
+	public String[] getList() {
 		return this.tabErreures;
 	}
-	
-	public  void setList() {
+
+	public void setList() {
 		// tabPlats = listPlats.toArray(tabPlats); String[] tabClients = new
 		// String[listClients.size()];
 		if (erreures.size() == 0) {
