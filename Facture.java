@@ -22,7 +22,7 @@ public class Facture {
 		return tabCommandes;
 	}
 
-
+	private String[] tabErreures;
 	private String[] tabPlats;
 	private double[] tabPrix;
 	private String[] tabCommandes;
@@ -91,19 +91,24 @@ public class Facture {
 				reponce[1][q] = format.format(tabCout[q]);
 			}
 		}
+		this.setList();
 		return reponce;
 	}
 
-	public static String[] getList() {
+	public  String[] getList() {
+		return this.tabErreures;
+	}
+	
+	public  void setList() {
 		// tabPlats = listPlats.toArray(tabPlats); String[] tabClients = new
 		// String[listClients.size()];
 		if (erreures.size() == 0) {
 			String[] tabErreures = new String[0];
-			return tabErreures;
+			this.tabErreures = tabErreures;
 		} else {
 			String[] tabErreures = new String[erreures.size()];
 			tabErreures = erreures.toArray(tabErreures);
-			return tabErreures;
+			this.tabErreures = tabErreures;
 		}
 	}
 }

@@ -4,7 +4,7 @@ Céline
 Steeve
 Plats :
 Poutine 10.5
-Orites 2.5
+Frites 2.5
 Repas_Poulet 15.75
 Commandes :
 Roger Poutine 1

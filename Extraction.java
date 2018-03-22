@@ -61,6 +61,7 @@ public class Extraction {
 			}
 			buffReader.close();
 		} catch (Exception e) {
+			valide = false;
 			System.out.println(erreur);
 		}
 		if (valide) {
@@ -73,7 +74,7 @@ public class Extraction {
 			tabCommandes = listCommandes.toArray(tabCommandes);
 			// Call la class Facture avec 3 tableau de String.
 			Facture facture1 = new Facture(tabClients, tabPlats, tabCommandes);
-			ecrireFichier(facture1.calculerFacture(), Facture.getList());
+			new EcrireFichier(facture1.calculerFacture(), facture1.getList());
 		} else {
 			System.out.println(erreur);
 
@@ -161,34 +162,5 @@ public class Extraction {
 		return verifier;
 	}
 
-	// Crée un fichier texte "ImpFacture.txt" avec un tableau à 2 dimension.
-	public static void ecrireFichier(String[][] tabString, String[] tabErreur) {
-		PrintWriter writer;
-		LocalDateTime temps = LocalDateTime.now();
-		try {
-			writer = new PrintWriter("Facture-du-" + temps.getDayOfMonth() + "-" + temps.getHour() + "-"
-					+ temps.getMinute() + "-" + temps.getSecond() + ".txt", "UTF-8");
-			writer.println("Bienvenue chez Barette!");
-			writer.println("Factures:");
-			// écrie les erreurs
-			
-			for (int i = 0; i < tabString[0].length; i++) {
-				writer.println(tabString[0][i] + " " + tabString[1][i]);
-			}
-			writer.println("--------------------------------------------------------------------------------------");
-			if (tabErreur != null) {
-				for (int i = 0; i < tabErreur.length; i++) {
-					writer.println(tabErreur[i]+" non valide.");
-				}
-			}
-			
-			
-			writer.close();
-		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Ne peux pas imprimer .");
-		}
-
-	}
 
 }
