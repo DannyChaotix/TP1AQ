@@ -32,7 +32,7 @@ public class JUnit_Test_Case_Facture {
 		
 		factureTestVal.calculerFacture();
 		tabTest = factureTestVal.getList();
-		assertEquals(0, tabTest.length);
+		assertEquals(1, tabTest.length);
 		
 		
 	}
@@ -74,7 +74,7 @@ public class JUnit_Test_Case_Facture {
 		
 		tabTest = factureTestVal.calculerFacture();
 		assertEquals("12,13$", tabTest[1][0]);
-		assertEquals("18,51$", tabTest[1][1]);
+		assertEquals("23,97$", tabTest[1][1]);
 		assertEquals("0,00$", tabTest[1][2]);
 		
 	}

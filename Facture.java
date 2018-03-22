@@ -62,6 +62,7 @@ public class Facture {
 				String[] commande = tabCommandes[j].split(" ");
 
 				if (commande[0].equals(tabClients[i])) {
+					if(Integer.parseInt(commande[2])>0){
 
 					// La boucle trouve le plat
 					for (int k = 0; k < tabPlats.length; k++) {
@@ -80,22 +81,23 @@ public class Facture {
 							affichage += ("Prix du repas: " + tabPlats[k] + " = " + format.format(save) + "\n"
 									+ "====================\n");
 
-							try {
-								String[] commandeTemp = tabCommandes[j + 1].split(" ");
-								if (!tabClients[i].equals(commandeTemp[0])) {
-									affichage += "Prix pour " + tabClients[i] + ": " + format.format(tabCout[i]) + "\n"
-											+ "====================\n\n";
-								}
-							} catch (ArrayIndexOutOfBoundsException e) {
-								affichage += "Prix pour " + tabClients[i] + ": " + format.format(tabCout[i]) + "\n"
-										+ "====================\n\n";
-							}
+							
 						}
 
 					}
-					
-
 				}
+					try {
+						String[] commandeTemp = tabCommandes[j + 1].split(" ");
+						if (!tabClients[i].equals(commandeTemp[0])) {
+							affichage += "Prix pour " + tabClients[i] + ": " + format.format(tabCout[i]) + "\n"
+									+ "====================\n\n";
+						}
+					} catch (ArrayIndexOutOfBoundsException e) {
+						affichage += "Prix pour " + tabClients[i] + ": " + format.format(tabCout[i]) + "\n"
+								+ "====================\n\n";
+					}
+				}
+				
 
 			}
 			for (int q = 0; q < tabCout.length; q++) {
@@ -105,7 +107,7 @@ public class Facture {
 
 		this.setList();
 
-		for (int r = 0; r < this.tabErreures.length; r++) {
+		for (int r = 0; r < tabErreures.length; r++) {
 			System.out.println("Erreur #" + (r + 1) + ": " + tabErreures[r] + " est invalide.");
 		}
 
@@ -131,31 +133,41 @@ public class Facture {
 	}
 
 	public void TrouverErreures() {
-		boolean tester = false, tester2 = false;
+			boolean tester = false, tester2 = false, tester3 = false;
 
-		for (int i = 0; i < tabCommandes.length; i++) {
-			String[] com = tabCommandes[i].split(" ");
+			for (int i = 0; i < tabCommandes.length; i++) {
+				String[] com = tabCommandes[i].split(" ");
 
-			for (int j = 0; j < tabClients.length; j++) {
-				if (tabClients[j].equals(com[0])) {
-					tester = true;
+				for (int j = 0; j < tabClients.length; j++) {
+					if (tabClients[j].equals(com[0])) {
+						tester = true;
+					}
 				}
+					
+				int test = Integer.parseInt(com[2]);
+				
+				if ( test > 0) {
+					tester3 = true;
+				}
+
 				for (int k = 0; k < tabPlats.length; k++) {
 					if (com[1].equals(tabPlats[k])) {
 						tester2 = true;
 					}
 				}
 
+				if (!tester) {
+					erreures.add(com[0]);
+				}
+				if (!tester2) {
+					erreures.add(com[1]);
+				}
+				if (!tester3) {
 
+					erreures.add(com[2]);
+				}
 			}
-			
-			if (!tester) {
-				erreures.add(com[0]);
-			}
-			if (!tester2) {
-				erreures.add(com[1]);}
-			
 
-		}
+
 	}
 }
