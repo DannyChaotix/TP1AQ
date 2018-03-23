@@ -1,34 +1,35 @@
+
 David
 ----------------------------
 
-Création de la Class Facture
-Ajout de la méthode CalculerFacture
-Ajout de la méthode Constucteur
-Ajout de la méthode getList
+CrÃ©ation de la Class Facture
+Ajout de la mÃ©thode CalculerFacture
+Ajout de la mÃ©thode Constucteur
+Ajout de la mÃ©thode getList
 
 Update Taxe TPS TVQ dans CalculerFacture
 Update Affichage sur le terminal CaldulerFacture
 
-Test Unitaire des méthodes Extraction
+Test Unitaire des mÃ©thodes Extraction
 
 
 Patrick
 ----------------------------
 
-Création de la Class Extraction
-Ajout de la méthode Main
-Ajout de la méthode Vérification
+CrÃ©ation de la Class Extraction
+Ajout de la mÃ©thode Main
+Ajout de la mÃ©thode VÃ©rification
 Ajout ecrirFichier
 
 Update Nouveau nom pour le fichier texte
 Update ecriture du tableau d'erreurs dans le fichier texte
 
-ré-usinage:
+rÃ©-usinage:
 
-La méthode ecrireFichier a été transformer en Class afin d'avoir une meilleur isolation des fonctionnalités
+La mÃ©thode ecrireFichier a Ã©tÃ© transformer en Class afin d'avoir une meilleur isolation des fonctionnalitÃ©s
 
 
-Test Unitaire des méthodes Facture (classe : Facture , methode : CalculerFacture, le retour : array reponce && array tabErreures)
+Test Unitaire des mÃ©thodes Facture (classe : Facture , methode : CalculerFacture, le retour : array reponce && array tabErreures)
 
 @Before
 testCreationDeFactures()
@@ -38,3 +39,4 @@ testFactureDonneesErrClient()
 testFactureDonneesErrPlats()
 testFactureDonneesErrQuantite()
 testFactureDonneesSommeTotal()
+
