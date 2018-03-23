@@ -1,1 +1,42 @@
- D�but de la partie 3 du projet AQL - T�ches
+
+David
+----------------------------
+
+Création de la Class Facture
+Ajout de la méthode CalculerFacture
+Ajout de la méthode Constucteur
+Ajout de la méthode getList
+
+Update Taxe TPS TVQ dans CalculerFacture
+Update Affichage sur le terminal CaldulerFacture
+
+Test Unitaire des méthodes Extraction
+
+
+Patrick
+----------------------------
+
+Création de la Class Extraction
+Ajout de la méthode Main
+Ajout de la méthode Vérification
+Ajout ecrirFichier
+
+Update Nouveau nom pour le fichier texte
+Update ecriture du tableau d'erreurs dans le fichier texte
+
+ré-usinage:
+
+La méthode ecrireFichier a été transformer en Class afin d'avoir une meilleur isolation des fonctionnalités
+
+
+Test Unitaire des méthodes Facture (classe : Facture , methode : CalculerFacture, le retour : array reponce && array tabErreures)
+
+@Before
+testCreationDeFactures()
+@Test
+testFactureDonneesValide()
+testFactureDonneesErrClient()
+testFactureDonneesErrPlats()
+testFactureDonneesErrQuantite()
+testFactureDonneesSommeTotal()
+

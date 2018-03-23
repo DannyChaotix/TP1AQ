@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -10,10 +11,10 @@ public class Extraction {
 	private static List<String> listClients = new ArrayList<String>();
 	private static List<String> listPlats = new ArrayList<String>();
 	private static List<String> listCommandes = new ArrayList<String>();
-	
-	//Lit les lignes du fichier texte et vérifie le format, un format non conforme sera rejeté avec un message d'erreur.
+
+	// Lit les lignes du fichier texte et vérifie le format, un format non conforme
+	// sera rejeté avec un message d'erreur.
 	public static void main(String[] args) {
-		
 
 		boolean valide = true;
 		try {
@@ -60,6 +61,7 @@ public class Extraction {
 			}
 			buffReader.close();
 		} catch (Exception e) {
+			valide = false;
 			System.out.println(erreur);
 		}
 		if (valide) {
@@ -70,17 +72,19 @@ public class Extraction {
 			tabClients = listClients.toArray(tabClients);
 			tabPlats = listPlats.toArray(tabPlats);
 			tabCommandes = listCommandes.toArray(tabCommandes);
-			//Call la class Facture avec 3 tableau de String.
-			Facture facture1 =new Facture(tabClients, tabPlats, tabCommandes);
-			ecrireFichier(facture1.calculerFacture());
+			// Call la class Facture avec 3 tableau de String.
+			Facture facture1 = new Facture(tabClients, tabPlats, tabCommandes);
+			new EcrireFichier(facture1.calculerFacture(), facture1.getList());
 		} else {
 			System.out.println(erreur);
 
 		}
 
 	}
-	//Switch qui vérifie la String avec un indice qui permet de savoir si nous somme dans la section Clients, Plats, Command ou autre.
-	private static boolean verification(String ligne, int ind) {
+
+	// Switch qui vérifie la String avec un indice qui permet de savoir si nous
+	// somme dans la section Clients, Plats, Command ou autre.
+	static boolean verification(String ligne, int ind) {
 		boolean verifier = true;
 		String[] tabStringTemp;
 
@@ -122,16 +126,18 @@ public class Extraction {
 
 		return verifier;
 	}
-	//Vérifie un mot
-	private static boolean verifierMot(String ligne) {
+
+	// Vérifie un mot
+	public static boolean verifierMot(String ligne) {
 		boolean verifier = true;
 		if (ligne.contains(" ") || Pattern.compile("[0-9]").matcher(ligne).find()) {
 			verifier = false;
 		}
 		return verifier;
 	}
-	//Vérifie un Chiffre
-	private static boolean verifierChiffre(String ligne) {
+
+	// Vérifie un Chiffre
+	public static boolean verifierChiffre(String ligne) {
 		boolean verifier = true;
 		try {
 			Double.parseDouble(ligne);
@@ -140,8 +146,9 @@ public class Extraction {
 		}
 		return verifier;
 	}
-	//Vérifie une quantité d'un plat
-	private static boolean verifierUnite(String ligne) {
+
+	// Vérifie une quantité d'un plat
+	public static boolean verifierUnite(String ligne) {
 		boolean verifier = true;
 		if (ligne.length() != 1) {
 			verifier = false;
@@ -154,23 +161,6 @@ public class Extraction {
 		}
 		return verifier;
 	}
-	//Crée un fichier texte "ImpFacture.txt" avec un tableau à 2 dimension.
-	public static void ecrireFichier(String[][] tabString) {
-		PrintWriter writer;
 
-		try {
-			writer = new PrintWriter("ImpFacture.txt", "UTF-8");
-			writer.println("Bienvenue chez Barette!");
-			writer.println("Factures:");
-			for (int i = 0; i < tabString[0].length; i++) {
-				writer.println(tabString[0][i] + " " + tabString[1][i]);
-			}
-			writer.close();
-		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Ne peux pas imprimer .");
-		}
-
-	}
 
 }
