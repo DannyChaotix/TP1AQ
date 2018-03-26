@@ -41,6 +41,7 @@ public class Facture {
 			this.tabPlats[i] = temp[0];
 			this.tabPrix[i] = Double.parseDouble(temp[1]);
 		}
+		
 	}
 
 	public String[][] calculerFacture() {

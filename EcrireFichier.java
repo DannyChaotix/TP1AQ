@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public class EcrireFichier {
 
 
-	public EcrireFichier(String[][] tabString, String[] tabErreur) {
+	public EcrireFichier(String ligne, String[] tabErreur) {
 		PrintWriter writer;
 		LocalDateTime temps = LocalDateTime.now();
 		try {
@@ -16,16 +16,18 @@ public class EcrireFichier {
 			writer.println("Factures:");
 			// écrie les erreurs
 			
-			for (int i = 0; i < tabString[0].length; i++) {
-				writer.println(tabString[0][i] + " " + tabString[1][i]);
-			}
-			writer.println("--------------------------------------------------------------------------------------");
+			/*for (int i = 0; i < tabString[0].length; i++) {
+			*	writer.println(tabString[0][i] + " " + tabString[1][i]);
+			*}
+			*/
 			if (tabErreur != null) {
 				for (int i = 0; i < tabErreur.length; i++) {
 					writer.println(tabErreur[i]+" non valide.");
 				}
+				writer.println("--------------------------------------------------------------------------------------");
 			}
 			
+			writer.println(ligne);
 			
 			writer.close();
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {

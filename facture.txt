@@ -1,7 +1,8 @@
 Clients :
-Roger
-Céline
-Steeve
+Roger 1
+Céline 3
+Steeve 3
+Dave 3
 Plats :
 Poutine 10.5
 Frites 2.5
@@ -10,4 +11,5 @@ Commandes :
 Roger Poutine 1
 Céline Frites 2
 Céline Repas_Poulet 1
+Dave Poutine 3
 Fin

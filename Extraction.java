@@ -93,7 +93,11 @@ public class Extraction {
 			verifier = false;
 			break;
 		case 1:
-			if (!verifierMot(ligne)) {
+			String[] ligneMot = ligne.split(" ");
+			if (ligneMot.length != 2) {
+				verifier = false;
+			}
+			if (!verifierMot(ligneMot[0])) {
 				verifier = false;
 			}
 			;
@@ -130,9 +134,11 @@ public class Extraction {
 	// Vérifie un mot
 	public static boolean verifierMot(String ligne) {
 		boolean verifier = true;
+		
 		if (ligne.contains(" ") || Pattern.compile("[0-9]").matcher(ligne).find()) {
 			verifier = false;
 		}
+
 		return verifier;
 	}
 
