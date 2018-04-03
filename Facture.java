@@ -5,6 +5,7 @@ import java.util.List;
 public class Facture {
 
 	private String[] tabClients;
+	private String[] tabTables;
 
 	public String[] getTabClients() {
 		return tabClients;
@@ -27,11 +28,24 @@ public class Facture {
 	private double[] tabPrix;
 	private String[] tabCommandes;
 	private String affichage = "";
+	int top = 0;
 	private static List<String> erreures = new ArrayList<String>();
 
 	public Facture(String[] tabClients, String[] tabPlats, String[] tabCommandes) {
 		super();
-		this.tabClients = tabClients;
+		String[][] clientsTemp = new String[tabClients.length][2];
+		for (int i = 0; i < tabClients.length; i++) {
+			String[] temp = tabClients[i].split(" ");
+			clientsTemp[i][0] = temp[0];
+			clientsTemp[i][1] = temp[1];
+			int tempTop = Integer.parseInt(temp[1]);
+			if (tempTop > top) {
+				top = tempTop;
+			}
+
+		}
+		this.tabClients = clientsTemp[0];
+		this.tabTables = clientsTemp[1];
 		this.tabCommandes = tabCommandes;
 		this.tabPrix = new double[tabPlats.length];
 		this.tabPlats = new String[tabPlats.length];
@@ -41,78 +55,87 @@ public class Facture {
 			this.tabPlats[i] = temp[0];
 			this.tabPrix[i] = Double.parseDouble(temp[1]);
 		}
-		
+
 	}
 
 	public String calculerFacture() {
 
-		TrouverErreures();
-
-		affichage += "Factures: \n";
+		Double[] tabPrixTables = new Double[top];
+		String[] tabAjout = new String[top];
 		DecimalFormat format = new DecimalFormat("0.00$");
+		for (int i = 1; i < top; i++) {// Les Tables "i"
 
-		double[] tabCout = new double[tabClients.length];
-		String[][] reponce = new String[2][tabClients.length];
-
-		reponce[0] = tabClients;
-
-		for (int i = 0; i < tabClients.length; i++) {
-
-			for (int j = 0; j < tabCommandes.length; j++) {
-				// commande contient les aspects de la commande (0=Client, 1=Plat, 2=Quantitée)
+			tabAjout[i]+= "\tPlats:\n";
+			for (int j = 0; j < tabCommandes.length; j++) {// Les Commandes "j"
 				String[] commande = tabCommandes[j].split(" ");
 
-				if (commande[0].equals(tabClients[i])) {
-					if(Integer.parseInt(commande[2])>0){
+				boolean testUser = false;
+				for (int k = 0; k < tabClients.length; k++) {// Les Clients "k"
+					if (commande[0].equals(tabClients[k])) {
+						testUser = true;
 
-					// La boucle trouve le plat
-					for (int k = 0; k < tabPlats.length; k++) {
-						double prix = 0;
-						if (commande[1].equals(tabPlats[k])) {
-							prix = (tabPrix[k] * Double.parseDouble(commande[2]));
-							affichage += ("Repas: " + tabPlats[k] + "\n" + "Prix a ajouter= " + format.format(prix)
-									+ "\n");
-							double prixTPS = prix * 0.05;
-							affichage += ("TPS: " + format.format(prixTPS) + "\n");
-							double prixTVQ = (prix + prixTPS) * 0.10;
-							affichage += ("TVQ: " + format.format(prixTVQ) + "\n");
-							double save = (prix + prixTPS + prixTVQ);
-							tabCout[i] += save;
+						if (i == Integer.parseInt(tabTables[k])) {// Si la commande fait partie de la table
 
-							affichage += ("Prix du repas: " + tabPlats[k] + " = " + format.format(save) + "\n"
-									+ "====================\n");
+							boolean testPlat = false;
+							for (int l = 0; l < tabPlats.length; l++) {// Les Plats "l"
 
-							
+								if (tabPlats[l].equals(commande[1])) {// Trouve le plat
+									testPlat = true;
+									boolean testNum = false;
+									if (commande.length == 3 || Integer.parseInt(commande[2]) >= 1) {// Si la quantitée
+																										// est valide
+
+										testNum = true;
+										tabAjout[i] ="\t"+ commande[1] + " * " + commande[2] + "= "
+												+ format.format((tabPrix[l] * Integer.parseInt(commande[2]))) + "\n";
+										tabPrixTables[i] += (tabPrix[l] * Integer.parseInt(commande[2]));// Ajoute le
+																											// prix a la
+																											// table
+									}
+									if (!testNum) {// La quantitée est invalide
+										erreures.add("La quantitée de " + commande[2]);
+									}
+								}
+
+							}
+							if (!testPlat) {// Le Plat n'existe pas
+								erreures.add("Le plat " + commande[1]);
+							}
 						}
 
 					}
-				}
-					try {
-						String[] commandeTemp = tabCommandes[j + 1].split(" ");
-						if (!tabClients[i].equals(commandeTemp[0])) {
-							affichage += "Prix pour " + tabClients[i] + ": " + format.format(tabCout[i]) + "\n"
-									+ "====================\n\n";
-						}
-					} catch (ArrayIndexOutOfBoundsException e) {
-						affichage += "Prix pour " + tabClients[i] + ": " + format.format(tabCout[i]) + "\n"
-								+ "====================\n\n";
+					if (!testUser) {// L'usager n'existe pas
+						erreures.add("L'usager " + commande[0]);
 					}
+
 				}
-				
+			}
 
-			}
-			for (int q = 0; q < tabCout.length; q++) {
-				reponce[1][q] = format.format(tabCout[q]);
-			}
 		}
 
-		this.setList();
+		for (int m = 0; m < top; m++) {// Les tables (Encore) "m"
 
-		for (int r = 0; r < tabErreures.length; r++) {
-			System.out.println("Erreur #" + (r + 1) + ": " + tabErreures[r] + " est invalide.");
+			int testQuant = 0;
+			for (int n = 0; n > tabClients.length; n++) {// les Clients (encore) "n"
+
+				if (Integer.parseInt(tabTables[n]) == m) {
+					testQuant++;
+				}
+				if (testQuant > 0) {
+					affichage += "Table " + (m + 1) + "\n\n";
+					affichage +=tabAjout[m];
+				}
+			}
+			if (tabPrixTables[m] >= 100 || testQuant >= 3) {// le prix est au dessu de 100$/plus de 3 personnes a la
+															// table
+				tabPrixTables[m] += (tabPrixTables[m] * 0.15);
+			}
+				affichage +="Prix Brut = " + format.format(tabPrixTables[m]) + "\n";
+			tabPrixTables[m] += tabPrixTables[m] * 0.15;// Taxes
+				affichage += "Ajout des taxes: "+format.format(tabPrixTables[m] * 0.15)+ "\n";
+				affichage += "Total: "+tabPrixTables[m];
 		}
 
-		System.out.println(affichage);
 		return affichage;
 	}
 
@@ -133,42 +156,4 @@ public class Facture {
 		}
 	}
 
-	public void TrouverErreures() {
-			boolean tester = false, tester2 = false, tester3 = false;
-
-			for (int i = 0; i < tabCommandes.length; i++) {
-				String[] com = tabCommandes[i].split(" ");
-
-				for (int j = 0; j < tabClients.length; j++) {
-					if (tabClients[j].equals(com[0])) {
-						tester = true;
-					}
-				}
-					
-				int test = Integer.parseInt(com[2]);
-				
-				if ( test > 0) {
-					tester3 = true;
-				}
-
-				for (int k = 0; k < tabPlats.length; k++) {
-					if (com[1].equals(tabPlats[k])) {
-						tester2 = true;
-					}
-				}
-
-				if (!tester) {
-					erreures.add(com[0]);
-				}
-				if (!tester2) {
-					erreures.add(com[1]);
-				}
-				if (!tester3) {
-
-					erreures.add(com[2]);
-				}
-			}
-
-
-	}
 }
