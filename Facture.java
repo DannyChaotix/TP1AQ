@@ -44,7 +44,7 @@ public class Facture {
 		
 	}
 
-	public String[][] calculerFacture() {
+	public String calculerFacture() {
 
 		TrouverErreures();
 
@@ -113,7 +113,7 @@ public class Facture {
 		}
 
 		System.out.println(affichage);
-		return reponce;
+		return affichage;
 	}
 
 	public String[] getList() {
