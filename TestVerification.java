@@ -7,7 +7,7 @@ public class TestVerification {
 	@Test
 	public void test() {
 		Extraction test = new Extraction();
-		boolean resultat = test.verification("Dave",1);
+		boolean resultat = test.verification("Dave 1",1);
 		assertEquals(true,resultat);
 		
 		resultat = test.verification("Spagetti 7.25",2);
