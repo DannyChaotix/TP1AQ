@@ -25,7 +25,7 @@ public class JUnit_Test_Case_Facture {
 		factureTestErrQuantite = new Facture(tabClient, tabPlats, tabCommandesErreurQuantite);
 		
 	}
-	
+	// Test pour voir si le tableau d'erreur est vide avec une facture valide factureTestVal
 	@Test
 	public void testFactureDonneesValide() {
 		String[] tabTest;
@@ -36,7 +36,7 @@ public class JUnit_Test_Case_Facture {
 		
 		
 	}
-	
+	// Test pour voir si le tableau d'erreur contient l'erreur "Patrick" avec une facture erronée factureTestErrClient
 	@Test
 	public void testFactureDonneesErrClient() {
 		String[] tabTest;
@@ -47,7 +47,7 @@ public class JUnit_Test_Case_Facture {
 
 		
 	}
-	
+	// Test pour voir si le tableau d'erreur contient l'erreur "BigMac" avec une facture erronée factureTestErrPlats
 	@Test
 	public void testFactureDonneesErrPlats() {
 		String[] tabTest;
@@ -57,7 +57,7 @@ public class JUnit_Test_Case_Facture {
 		assertEquals("BigMac", tabTest[0]);
 		
 	}
-	
+	// Test pour voir si le tableau d'erreur contient l'erreur "-2" avec une facture erronée factureTestErrQuantite
 	@Test
 	public void testFactureDonneesErrQuantite() {
 		String[] tabTest;
@@ -68,15 +68,7 @@ public class JUnit_Test_Case_Facture {
 		
 	}
 	
-	@Test
-	public void testFactureDonneesSommeTotal() {
-		String[][] tabTest;
-		
-		tabTest = factureTestVal.calculerFacture();
-		assertEquals("12,13$", tabTest[1][0]);
-		assertEquals("23,97$", tabTest[1][1]);
-		assertEquals("0,00$", tabTest[1][2]);
-		
-	}
+	
+
 	
 }

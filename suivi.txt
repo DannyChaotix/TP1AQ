@@ -1,4 +1,4 @@
-
+﻿
 David
 ----------------------------
 
@@ -39,4 +39,7 @@ testFactureDonneesErrClient()
 testFactureDonneesErrPlats()
 testFactureDonneesErrQuantite()
 testFactureDonneesSommeTotal()
+
+Test Fonctionnel (Formulaire): Patrick_Papineau_TestFonctionnel.doc (Avec une erreur).
+Fichier de test utiliser : PatrickTestFonctionnel.txt
 
