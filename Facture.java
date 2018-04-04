@@ -149,11 +149,11 @@ public class Facture {
 																// table
 					tabPrixTables[m] += (tabPrixTables[m] * 0.15);
 				}
-				affichage += "Table" + (m + 1) + "\n\n";
-				affichage += "Prix Brut = " + format.format(tabPrixTables[m]) + "\n";
+				affichage += "Table" + (m + 1) + "\n\n;";
+				affichage += "Prix Brut = " + format.format(tabPrixTables[m]) + "\n;";
 				tabPrixTables[m] += tabPrixTables[m] * 0.15;// Taxes
-				affichage += "Ajout des taxes: " + format.format(tabPrixTables[m] * 0.15) + "\n";
-				affichage += "Total: " + format.format(tabPrixTables[m]);
+				affichage += "Ajout des taxes: " + format.format(tabPrixTables[m] * 0.15) + "\n;";
+				affichage += "Total: " + format.format(tabPrixTables[m])+";";
 
 			}
 		}

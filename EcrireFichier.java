@@ -9,6 +9,7 @@ public class EcrireFichier {
 	public EcrireFichier(String ligne, String[] tabErreur) {
 		PrintWriter writer;
 		LocalDateTime temps = LocalDateTime.now();
+		String[] ligneMot = ligne.split(";");
 		try {
 			writer = new PrintWriter("Facture-du-" + temps.getDayOfMonth() + "-" + temps.getHour() + "-"
 					+ temps.getMinute() + "-" + temps.getSecond() + ".txt", "UTF-8");
@@ -26,8 +27,10 @@ public class EcrireFichier {
 				}
 				writer.println("--------------------------------------------------------------------------------------");
 			}
-			
-			writer.println(ligne);
+			for (int i = 0; i < ligneMot.length; i++) {
+				writer.println(ligneMot[i]);	
+			}
+
 			
 			writer.close();
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
